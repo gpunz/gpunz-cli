@@ -36,11 +36,18 @@ curl -fsSL https://gpu.nz/install.sh | sh
 # Windows (PowerShell)
 irm https://gpu.nz/install.ps1 | iex
 
+# Homebrew (macOS, Linux)
+brew install gpunz/tap/gpunz
+
+# Scoop (Windows)
+scoop bucket add gpunz https://github.com/gpunz/scoop-bucket
+scoop install gpunz
+
 # From source (Go 1.22+)
 go install github.com/gpunz/gpunz-cli/cmd/gpunz@latest
 ```
 
-The installers verify the binary against `SHA256SUMS` before installing. Prebuilt binaries are also attached to every [GitHub release](https://github.com/gpunz/gpunz-cli/releases). Update later with `gpunz update`.
+The installers verify the binary against `SHA256SUMS` before installing; Homebrew and Scoop check the same hashes. Using an AI agent? The [gpu.nz MCP server](https://github.com/gpunz/gpunz-mcp) gives Claude, Cursor and Codex the same actions. Prebuilt binaries are also attached to every [GitHub release](https://github.com/gpunz/gpunz-cli/releases). Update later with `gpunz update`.
 
 ## Quick start
 
