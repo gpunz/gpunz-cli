@@ -1,0 +1,5 @@
+dist/
+/gpunz
+/gpunz.exe
+*.test
+coverage.out
