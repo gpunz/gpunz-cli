@@ -1085,3 +1085,41 @@ func TestJSONOutputReadsNoBalance(t *testing.T) {
 		t.Fatalf("JSON should pass the response through:\n%s", h.out)
 	}
 }
+
+func TestTopupURL(t *testing.T) {
+	cases := []struct {
+		base   string
+		ru     bool
+		amount string
+		want   string
+	}{
+		{"https://gpu.nz/api/v1", true, "500", "https://gpu.nz/console/billing?topup=500"},
+		{"https://gpu.nz/api/v1", false, "", "https://gpu.nz/en/console/billing"},
+		{"http://localhost:3000/api/v1", true, "", "http://localhost:3000/console/billing"},
+		{"::bad", true, "100", "https://gpu.nz/console/billing?topup=100"},
+	}
+	for _, c := range cases {
+		if got := topupURL(c.base, c.ru, c.amount); got != c.want {
+			t.Fatalf("topupURL(%q, %v, %q) = %q, want %q", c.base, c.ru, c.amount, got, c.want)
+		}
+	}
+}
+
+func TestTopupPrintsLinkAndQR(t *testing.T) {
+	h := newHarness(t, nil, "")
+	opened := ""
+	h.a.openURL = func(u string) error { opened = u; return nil }
+	if code := h.run("topup", "750"); code != 0 {
+		t.Fatalf("exit %d: %s", code, h.errb)
+	}
+	out := h.out.String()
+	if !strings.Contains(out, "/console/billing?topup=750") || !strings.Contains(out, "█") {
+		t.Fatalf("output has no link or QR: %q", out)
+	}
+	if !strings.HasSuffix(opened, "/console/billing?topup=750") {
+		t.Fatalf("opened %q", opened)
+	}
+	if code := h.run("topup", "12.5"); code == 0 {
+		t.Fatal("a fractional amount was accepted")
+	}
+}

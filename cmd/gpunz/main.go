@@ -229,6 +229,7 @@ func (a *app) commands() []command {
 		{name: "logout", en: "Forget the saved API key", ru: "Удалить сохранённый ключ", usage: "logout", run: cmdLogout},
 		{name: "whoami", en: "Show the signed-in account", ru: "Показать аккаунт", usage: "whoami", needAuth: true, run: cmdWhoami},
 		{name: "balance", en: "Show balance and runway", ru: "Баланс и запас времени", usage: "balance", needAuth: true, run: cmdBalance},
+		{name: "topup", en: "Top up the balance (opens the payment page, shows a QR code)", ru: "Пополнить баланс (страница оплаты и QR-код)", usage: "topup [AMOUNT] [--no-browser] [--no-qr]", run: cmdTopup},
 		{name: "gpus", en: "List GPU models", ru: "Список моделей GPU", usage: "gpus", run: cmdGpus},
 		{name: "search", en: "Search rentable offers", ru: "Поиск предложений", usage: "search [filters]", run: cmdSearch},
 		{name: "templates", en: "List launch templates", ru: "Шаблоны запуска", usage: "templates", run: cmdTemplates},

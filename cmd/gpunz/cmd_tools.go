@@ -168,12 +168,13 @@ func removeOldBinary(exe string) {
 	os.Remove(exe + ".old")
 }
 
-var completionCommands = []string{"login", "logout", "whoami", "balance", "gpus", "search", "templates",
+var completionCommands = []string{"login", "logout", "whoami", "balance", "topup", "gpus", "search", "templates",
 	"ssh-keys", "create", "instances", "ls", "show", "start", "stop", "destroy", "ssh", "logs", "api-keys",
 	"version", "update", "completion"}
 
 var completionFlags = map[string][]string{
 	"login":     {"--key", "--no-browser"},
+	"topup":     {"--no-browser", "--no-qr"},
 	"search":    {"--gpu", "--num-gpus", "--type", "--max-price", "--country", "--min-reliability", "--verified", "--min-vram", "--min-cuda", "--min-disk", "--min-down", "--order", "--limit"},
 	"create":    {"--template", "--disk", "--name", "--type", "--ssh-key", "--env", "--onstart"},
 	"instances": {"--all"},

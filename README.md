@@ -22,6 +22,7 @@ Search live GPU offers, launch ComfyUI, Jupyter, Ollama or vLLM in one command, 
 - **Any GPU.** From RTX 3060 to RTX 4090/5090, A100, H100, H200 and B200, on demand or interruptible (cheaper).
 - **One-command environments.** Templates for ComfyUI, Stable Diffusion Forge, JupyterLab, Ollama + Open WebUI, vLLM (OpenAI-compatible API), PyTorch, or your own Docker image.
 - **Scriptable.** Every command has `--json`, so it fits shell scripts, CI and agents.
+- **Top up from the terminal.** `gpunz topup 500` draws a QR code you scan with your phone to pay by SBP.
 - **Single static binary.** Linux, macOS and Windows, amd64 and arm64. No runtime to install.
 
 ## Install
@@ -43,6 +44,7 @@ The installers verify the binary against `SHA256SUMS` before installing. Prebuil
 
 ```sh
 gpunz login                                   # opens the browser to approve this device
+gpunz topup 500                               # pay by SBP: scan the QR code in the terminal with your phone
 gpunz gpus                                    # GPU models, VRAM, free units and the lowest price
 gpunz search --gpu rtx-4090-24gb --limit 5    # live offers, cheapest first
 gpunz templates                               # ComfyUI, Jupyter, Ollama, vLLM, ...
@@ -72,6 +74,7 @@ Prices change with the market; the CLI always shows the live price.
 | `login [--key KEY] [--no-browser]` | Sign in with the browser device flow, or save an API key |
 | `logout` / `whoami` | Forget the saved key / show the signed-in account |
 | `balance` | Balance and how long it lasts at the current spend |
+| `topup [AMOUNT]` | Top up: opens the payment page (SBP or crypto) and draws its link as a QR code for your phone camera |
 | `gpus` | GPU models with VRAM, availability and the lowest price |
 | `search [filters]` | Rentable offers: `--gpu`, `--num-gpus`, `--type on_demand\|interruptible`, `--max-price`, `--country`, `--min-vram`, `--min-cuda`, `--min-disk`, `--min-down`, `--verified`, `--order`, `--limit` |
 | `templates` | Launch templates (ComfyUI, Forge, Jupyter, Ollama, vLLM, PyTorch, ...) |
@@ -127,6 +130,7 @@ curl -fsSL https://gpu.nz/install.sh | sh     # Linux / macOS
 irm https://gpu.nz/install.ps1 | iex          # Windows
 
 gpunz login
+gpunz topup 500                               # QR-код для оплаты по СБП с телефона
 gpunz search --gpu rtx-4090-24gb --limit 5
 gpunz create OFFER_ID --template comfyui
 gpunz ssh INSTANCE_ID
