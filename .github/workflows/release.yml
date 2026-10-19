@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.22"
-      - run: GPUNZ_VERSION="${GITHUB_REF_NAME#v}" ./build.sh
+          go-version: stable
+      - run: GPUNZ_VERSION="${GITHUB_REF_NAME#v}" sh ./build.sh
       - uses: softprops/action-gh-release@v2
         with:
           files: dist/*
