@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src=".github/banner.jpg" alt="gpunz CLI — rent RTX 4090, A100 or H100 from your terminal, billed by the minute" width="100%">
+
 # gpunz — command-line client for the gpu.nz GPU cloud
 
 **Rent an RTX 4090, A100 or H100 from your terminal, billed by the minute.**
